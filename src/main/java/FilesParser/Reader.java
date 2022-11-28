@@ -5,22 +5,29 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Reader {
-    private File fileName;
+    private String filePath;
 
-    public Reader(File fileName) {
-        this.fileName = fileName;
+    public Reader(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Reader(File file) {
+        this.filePath = file.getAbsolutePath();
     }
 
     public void readFile() {
+        Scanner reader;
         try {
-            Scanner fileReader = new Scanner(fileName);
-            while (fileReader.hasNextLine()) {
-                String fileLine = fileReader.nextLine();
+            reader = new Scanner(new File(filePath));
+            while (reader.hasNextLine()) {
+                String fileLine = reader.nextLine();
                 System.out.println(fileLine);
             }
+            reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
             e.printStackTrace();
         }
+
     }
 }
