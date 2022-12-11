@@ -10,4 +10,14 @@ public class Packet {
         this.type = type;
         this.bytes = bytes;
     }
+
+    @Override
+    public String toString() {
+        return "Packet{" +
+                "Date=" + date +
+                ", type=" + type +
+                ", Bytes=" + bytes +
+                "}";
+
+    }
 }

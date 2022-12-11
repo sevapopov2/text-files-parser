@@ -1,8 +1,12 @@
 package FilesParser;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.util.List;
 
 public class Reader {
     private String filePath;
@@ -15,19 +19,19 @@ public class Reader {
         this.filePath = file.getAbsolutePath();
     }
 
-    public void readFile() {
-        Scanner reader;
+    public List<Packet> startParse() {
+        InputStreamReader inputStreamReader = null;
         try {
-            reader = new Scanner(new File(filePath));
-            while (reader.hasNextLine()) {
-                String fileLine = reader.nextLine();
-                System.out.println(fileLine);
-            }
-            reader.close();
+            inputStreamReader = new InputStreamReader(new FileInputStream(this.filePath));
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
             e.printStackTrace();
         }
+        return readStrings(new BufferedReader(inputStreamReader));
+    }
 
+    public List<Packet> readStrings(String strings) {
+        StringReader stringReader = new StringReader(strings);
+        BufferedReader bufferedReader = new BufferedReader(stringReader);
+        return readStrings(bufferedReader);
     }
 }
