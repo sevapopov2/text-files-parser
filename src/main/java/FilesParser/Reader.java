@@ -2,10 +2,9 @@ package FilesParser;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
+import java.io.FileReader;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Reader {
@@ -20,18 +19,19 @@ public class Reader {
     }
 
     public List<Packet> startParse() {
-        InputStreamReader inputStreamReader = null;
+        List<Packet> result = new ArrayList<>();
+
         try {
-            inputStreamReader = new InputStreamReader(new FileInputStream(this.filePath));
-        } catch (FileNotFoundException e) {
+            BufferedReader fileReader = new BufferedReader(new FileReader(this.filePath));
+            while (fileReader.ready()) {
+                String line = fileReader.readLine();
+                result.add(line);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return readStrings(new BufferedReader(inputStreamReader));
+        
+        return result;
     }
 
-    public List<Packet> readStrings(String strings) {
-        StringReader stringReader = new StringReader(strings);
-        BufferedReader bufferedReader = new BufferedReader(stringReader);
-        return readStrings(bufferedReader);
-    }
 }
