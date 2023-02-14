@@ -6,14 +6,14 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFilesReader implements Reader {
+public class TextFilesParser implements Parser {
     private String filePath;
 
-    public TextFilesReader(String filePath) {
+    public TextFilesParser(String filePath) {
         this.filePath = filePath;
     }
 
-    public TextFilesReader(File file) {
+    public TextFilesParser(File file) {
         this.filePath = file.getAbsolutePath();
     }
 

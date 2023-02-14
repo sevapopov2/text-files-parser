@@ -1,10 +1,10 @@
 package FilesParser;
 
 public class ParserFactory {
-    public static TextFilesReader getParser(String filePath) {
+    public static TextFilesParser getParser(String filePath) {
         if (filePath.endsWith(".txt")) {
 
-            return new TextFilesReader(filePath);
+            return new TextFilesParser(filePath);
         }
         return null;
     }
