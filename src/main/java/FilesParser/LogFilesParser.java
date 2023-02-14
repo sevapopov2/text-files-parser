@@ -6,14 +6,14 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFilesParser implements Parser {
+public class LogFilesParser implements Parser {
     private String filePath;
 
-    public TextFilesParser(String filePath) {
+    public LogFilesParser(String filePath) {
         this.filePath = filePath;
     }
 
-    public TextFilesParser(File file) {
+    public LogFilesParser(File file) {
         this.filePath = file.getAbsolutePath();
     }
 
@@ -24,7 +24,8 @@ public class TextFilesParser implements Parser {
             BufferedReader fileReader = new BufferedReader(new FileReader(this.filePath));
             while (fileReader.ready()) {
                 String line = fileReader.readLine();
-                Packet packet = new Packet(line.split("; ")[0], line.split("; ")[1], Integer.parseInt(line.split("; ")[2]));
+                Packet packet = new Packet(line.split("; ")[0], line.split("; ")[1],
+                        Integer.parseInt(line.split("; ")[2]));
                 result.add(packet);
             }
             fileReader.close();
@@ -32,6 +33,7 @@ public class TextFilesParser implements Parser {
             e.printStackTrace();
         }
 
+        System.out.println(result);
         return result;
     }
 
