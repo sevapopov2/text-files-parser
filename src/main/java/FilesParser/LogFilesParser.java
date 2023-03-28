@@ -24,9 +24,11 @@ public class LogFilesParser implements Parser {
             BufferedReader fileReader = new BufferedReader(new FileReader(this.filePath));
             while (fileReader.ready()) {
                 String line = fileReader.readLine();
-                Packet packet = new Packet(line.split("; ")[0], line.split("; ")[1],
-                        Integer.parseInt(line.split("; ")[3]));
-                result.add(packet);
+                if (!line.contains("***")) {
+                    Packet packet = new Packet(line.split("; ")[0], line.split("; ")[1],
+                            Integer.parseInt(line.split("; ")[3].replace(" bytes", "")));
+                    result.add(packet);
+                }
             }
             fileReader.close();
         } catch (Exception e) {
