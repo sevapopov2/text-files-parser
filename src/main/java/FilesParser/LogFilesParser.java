@@ -25,7 +25,7 @@ public class LogFilesParser implements Parser {
             while (fileReader.ready()) {
                 String line = fileReader.readLine();
                 Packet packet = new Packet(line.split("; ")[0], line.split("; ")[1],
-                        Integer.parseInt(line.split("; ")[2]));
+                        Integer.parseInt(line.split("; ")[3]));
                 result.add(packet);
             }
             fileReader.close();
